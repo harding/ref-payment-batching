@@ -1,0 +1,25 @@
+#!/bin/bash -eu
+
+cat <<EOF | bin/pdiag-wrapper -o p2pkh-1in-3out_bytes_v1.svg -T svg
+colwidth = 50
+node_height = 48
+
+4 Version
+1 Count [rotate = 270]
+36 Outpoint [color = pink]
+1 Count [rotate = 270, color = pink]
+107 ScriptSig (witness) [color = pink]
+4 Sequence [color = pink]
+1 Count [rotate = 270]
+8 Amount [color = lightgreen]
+1 Count [rotate = 270, color = lightgreen]
+25 ScriptPubKey (encumbrance) [color = lightgreen]
+8 Amount [color = lightblue]
+1 Count [rotate = 270, color = lightblue]
+25 ScriptPubKey (encumbrance) [color = lightblue]
+8 Amount [color = yellow]
+1 Count [rotate = 270, color = yellow]
+25 ScriptPubKey (encumbrance) [color = yellow]
+4 Locktime
+
+EOF

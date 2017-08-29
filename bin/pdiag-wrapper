@@ -1,0 +1,32 @@
+#!/bin/bash -eu
+
+INPUT="$(cat)"
+
+packetdiag "$@"  <(
+#cat  <(
+
+  echo '{'
+
+  end_byte=-1
+  for i in $( seq $( echo "$INPUT" | wc -l | sed 's/ .*//' ) )
+  do
+      line=$(  echo "$INPUT" | sed -n "${i}p" )
+      bytes=$( echo "$line" | sed "s/ .*//" )
+      entry=$( echo "$line" | sed -n "s/^[0-9]\+ //p")
+      
+      if [ ! "$entry" ]
+      then
+          echo $line
+          continue
+      fi
+      
+      start_byte=$(( end_byte + 1 ))
+      end_byte=$(( end_byte + bytes ))
+
+
+      echo ${start_byte}-${end_byte}: $entry
+  done
+
+  echo '}'
+
+)
